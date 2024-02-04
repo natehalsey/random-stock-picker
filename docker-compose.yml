@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  random-stock-picker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always

@@ -1,0 +1,1 @@
+30 13 * * * /usr/local/bin/python3 /var/task/random_stock_picker.py >> /var/task/cron.log 2>&1
