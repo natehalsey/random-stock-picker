@@ -1,4 +1,3 @@
-import logging
 import random
 import re
 
@@ -7,27 +6,9 @@ from twilio.rest import Client
 from typing import List
 
 from config import Config
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('/var/task/cron.log'),
-    ]
-)
+import logging # so we don't need to call an initialize logger func from config
 
 logger = logging.getLogger(__name__)
-
-
-try:
-    twilio_client = Client(
-        Config.TWILIO_ACCOUNT_SID, 
-        Config.TWILIO_AUTH_TOKEN,
-    )
-
-except Exception as e:
-    logger.error("Failed to initialize twilio client: %s", str(e))
-    raise
 
 def get_nasdaq_data() -> List[str]:
     nasdaq_data = []
@@ -65,6 +46,16 @@ def send_daily_stock_text() -> None:
         raise
 
     body = _create_text_body(stock_symbol)
+
+    try:
+        twilio_client = Client(
+            Config.TWILIO_ACCOUNT_SID, 
+            Config.TWILIO_AUTH_TOKEN,
+        )
+
+    except Exception as e:
+        logger.error("Failed to initialize twilio client: %s", str(e))
+        raise
     
     try:
         message = twilio_client.messages.create(

@@ -24,7 +24,7 @@ TO_NUMBER=""
 Afterward, simply run:
 
 ```
-. script/restart-docker
+. script/start-docker
 ```
 And the cron job will be running inside of a docker container. 
 
