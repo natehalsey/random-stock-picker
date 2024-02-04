@@ -6,6 +6,10 @@ Random stock picker is a cron job that pulls data from `ftp.nasdaqtrader.com` an
 
 First ensure `docker, docker-compose` and all dependencies are installed.
 
+```
+git clone https://github.com/natehalsey/random-stock-picker
+```
+
 Then you'll need to get your twilio information from twilio and set it in a `.env` file in the root of the project.
 
 ```
@@ -20,7 +24,6 @@ TO_NUMBER=""
 Afterward, simply run:
 
 ```
-git clone https://github.com/natehalsey/random-stock-picker
 . script/restart-docker
 ```
 And the cron job will be running inside of a docker container. 
