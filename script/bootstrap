@@ -1,7 +1,9 @@
-virtualenv --python=python3.10 -q random-stock-picker.venv
+PYTHON_VERSION=$(cat .python-version | head -n 1 | tail -1)
 
-source random-stock-picker.venv/bin/activate
+pyenv install $PYTHON_VERSION
+pyenv virtualenv $PYTHON_VERSION ${PWD##*/}.venv
+
+source  ${PWD##*/}.venv/bin/activate
 
 pip install pip-tools
-
 pip-sync requirements.txt
